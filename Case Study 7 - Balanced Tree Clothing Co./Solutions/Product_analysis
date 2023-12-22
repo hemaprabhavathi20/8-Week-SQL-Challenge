@@ -1,1 +1,29 @@
+#Added column revenue
+ALTER Table sales
+ADD COLUMN Revenue Decimal(10,2);
+UPDATE sales
+SET Revenue = qty*price* (1 - discount/100);
+
+#added column discount_amount
+ALTER Table sales
+ADD COLUMN Discount_amount Decimal(10,2);
+UPDATE sales
+SET Discount_amount = qty*price*discount/100
+
+#1.What was the total quantity sold for all products?
+
+select SUM(qty) as total_qty from sales;
+
+#2.What is the total generated revenue for all products before discounts?
+
+SELECT SUM(qty * price) as revenue_before_discount 
+from sales;
+
+#3.What was the total discount amount for all products?
+
+SELECT round(sum(qty * price * discount/100),0) as total_discount_amount
+from sales;
+
+                 #(OR)
+select sum(Discount_amount) from sales;
 
