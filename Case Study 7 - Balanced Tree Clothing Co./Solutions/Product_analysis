@@ -16,6 +16,9 @@ _______________________________________________________________________________
 ```
 select SUM(qty) as total_qty from sales;
 ```
+| total_quantity  |
+|-----------------|
+| 45216           |
 
 #2.What is the total generated revenue for all products before discounts?
 ```
