@@ -28,5 +28,5 @@ There are 2 main tables for the case study and are as follows:
 ER Diagram 
 ------------------------------------------------------------------------------------
 <p align="center">
-  <img src="https://github.com/hemaprabhavathi20/8-Week-SQL-Challenge/assets/147178268/9fc6fe6c-fd67-457b-97f7-10603626f0df" width="600" alt="Screenshot">
+  <img src="https://github.com/hemaprabhavathi20/8-Week-SQL-Challenge/assets/147178268/9fc6fe6c-fd67-457b-97f7-10603626f0df" width="650" alt="Screenshot">
 </p>
