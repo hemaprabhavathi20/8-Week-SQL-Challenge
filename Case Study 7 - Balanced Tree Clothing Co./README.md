@@ -25,3 +25,6 @@ There are 2 main tables for the case study and are as follows:
 1. **Product_details** - Includes all information about the entire range that Balanced Clothing sells in their store.
 2. **sales**          - contains product level information for all the transactions made for Balanced Tree including quantity, price, percentage discount, member status, a transaction ID and also the transaction timestamp.
 
+ER Diagram 
+------------------------------------------------------------------------------------
+![Screenshot (488)](https://github.com/hemaprabhavathi20/8-Week-SQL-Challenge/assets/147178268/9fc6fe6c-fd67-457b-97f7-10603626f0df) width=400
