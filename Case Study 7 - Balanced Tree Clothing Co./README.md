@@ -38,7 +38,6 @@ Case Study Questions:
 2. What is the total generated revenue for all products before discounts?
 3.What was the total discount amount for all products?
 
-------------------------------------------------------------------------
 
 **Transaction Analysis**
 1. How many unique transactions were there?
@@ -48,7 +47,6 @@ Case Study Questions:
 5. What is the percentage split of all transactions for members vs non-members?
 6.What is the average revenue for member transactions and non-member transactions?
 
-------------------------------------------------------------
 
 **Product Analysis**
 1. What are the top 3 products by total revenue before discount?
