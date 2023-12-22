@@ -1,0 +1,139 @@
+#1.What are the top 3 products by total revenue before discount?
+SELECT p.product_name ,
+	   SUM(s.qty* s.price) as Total_Revenue
+from product_details p
+JOIN sales s ON p.product_id = s.prod_id
+GROUP BY p.product_name
+ORDER BY Total_Revenue desc
+LIMIT 3;
+
+#2.What is the total quantity, revenue and discount for each segment?
+SELECT p.segment_name,
+       SUM(s.qty) as Total_quantity,
+       SUM(s.revenue) as Total_revenue_after_discount,
+       SUM(s.discount_amount) as Total_Discount
+FROM product_details p
+JOIN sales s ON p.product_id = s.prod_id
+GROUP BY p.segment_name
+order by p.segment_name
+
+#3. What is the top selling product for each segment?
+WITH cte as (
+SELECT p.segment_name,
+	   p.product_name,
+       SUM(s.qty) as total_quantity_sold,
+	   RANK() OVER (PARTITION BY p.segment_name ORDER BY SUM(s.qty) DESC ) as rnk
+       from product_details p
+       JOIN sales s 
+       ON p.product_id = s.prod_id
+	   GROUP BY p.segment_name,p.product_name
+) 
+SELECT segment_name,
+       product_name,
+       total_quantity_sold
+from cte 
+WHERE 
+  rnk = 1;
+
+#4.What is the total quantity, revenue and discount for each category?
+SELECT p.category_name,
+       SUM(s.qty) as Total_quantity,
+       SUM(s.revenue) as Total_revenue_after_discount,
+       SUM(s.discount_amount) as Total_Discount
+FROM product_details p
+JOIN sales s ON p.product_id = s.prod_id
+GROUP BY p.category_name
+order by p.category_name
+
+#5.What is the top selling product for each category?
+WITH cte as (
+SELECT p.category_name,
+	   p.product_name,
+       SUM(s.qty) as total_quantity_sold,
+	   RANK() OVER (PARTITION BY p.category_name ORDER BY SUM(s.qty) DESC ) as rnk
+       from product_details p
+       JOIN sales s 
+       ON p.product_id = s.prod_id
+	   GROUP BY p.category_name,p.product_name
+) 
+SELECT category_name,
+       product_name,
+       total_quantity_sold
+from cte 
+WHERE 
+  rnk = 1;
+  
+#6.What is the percentage split of revenue by product for each segment?
+WITH cte AS (
+  SELECT
+    p.segment_name,
+    p.product_name,
+    SUM(s.revenue) AS total_revenue
+  FROM
+    product_details p
+  JOIN
+    sales s ON p.product_id = s.prod_id
+  GROUP BY
+    p.segment_name, p.product_name
+   ORDER BY total_revenue DESC
+)
+SELECT
+  segment_name,
+  product_name,
+  total_revenue,
+  ROUND(total_revenue * 100 / SUM(total_revenue) OVER (PARTITION BY segment_name ), 2) AS revenue_percentage
+FROM
+  cte;
+
+#7.What is the percentage split of revenue by segment for each category
+WITH cte AS (
+  SELECT
+    p.category_name,
+    p.segment_name,
+    SUM(s.revenue) AS total_revenue
+  FROM
+    product_details p
+  JOIN
+    sales s ON p.product_id = s.prod_id
+  GROUP BY
+    p.category_name,p.segment_name
+   ORDER BY total_revenue DESC
+)
+
+SELECT
+  category_name,
+  segment_name,
+  total_revenue,
+  ROUND(total_revenue * 100 / SUM(total_revenue) OVER (PARTITION BY category_name), 2) AS revenue_percentage
+FROM
+  cte;
+  ;
+  
+#8.What is the percentage split of total revenue by category?
+WITH cte as(
+SELECT p.category_name,
+	   SUM(s.revenue) as total_revenue
+       from 
+	   product_details p
+       JOIN
+       sales s
+       ON p.product_id = s.prod_id
+       GROUP 
+       BY p.category_name
+)
+SELECT category_name,
+        total_revenue,
+        round(total_revenue * 100.0 / SUM(total_revenue) OVER(),2) as percentage_split
+FROM
+    cte
+ORDER BY percentage_split desc;
+
+#9.What is the total transaction “penetration” for each product? (hint: penetration = number of transactions where at least 1 quantity of a 
+# product was purchased divided by total number of transactions)?
+select product_name, 
+	   round(count(distinct txn_id)*100.0/(select count(distinct txn_id) from sales ),2) as penetration
+from sales s
+join product_details pd on s.prod_id = pd.product_id
+where qty>=1
+group by product_name
+order by penetration desc;
