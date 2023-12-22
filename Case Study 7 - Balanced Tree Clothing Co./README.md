@@ -23,5 +23,6 @@ Available Data
 ---------------------------------------------------------------------------------
 There are 2 main tables for the case study and are as follows:                                                                          
                     1. **Product_details** - Includes all information about the entire range that Balanced Clothing sells in their store.
-                     2. **sales **          - contains product level information for all the transactions made for Balanced Tree including quantity, price, percentage discount, member status, a transaction ID and also the transaction timestamp.
+                    
+                     2. **sales**          - contains product level information for all the transactions made for Balanced Tree including quantity, price, percentage discount, member status, a transaction ID and also the transaction timestamp.
 
