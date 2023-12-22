@@ -1,0 +1,67 @@
+##Transaction Analysis
+#1.How many unique transactions were there?
+SELECT count(DISTINCT txn_id) as unique_transactions from sales
+
+#2.What is the average unique products purchased in each transaction?
+with up as (
+SELECT
+  txn_id,
+  COUNT(DISTINCT prod_id) AS Upc-- unique product count
+FROM
+  balanced_tree.sales
+GROUP BY
+  txn_id
+)
+select round(avg(upc),0) as avg_unique_products from up
+  
+#3.What are the 25th, 50th and 75th percentile values for the revenue per transaction?
+WITH cte_transaction_revenue AS (
+  SELECT
+    txn_id,
+    SUM(revenue) AS revenue_after_discount
+  FROM balanced_tree.sales
+  GROUP BY txn_id
+),
+Quartiles AS (
+  SELECT
+    txn_id,
+    revenue_after_discount,
+    NTILE(4) OVER (ORDER BY revenue_after_discount) AS quartile
+  FROM cte_transaction_revenue
+)
+
+SELECT
+  CASE 
+    WHEN quartile = 1 THEN "percentile_25"
+    WHEN quartile = 2 THEN "percentile_50"
+    WHEN quartile = 3 THEN "percentile_75"
+  END AS percentile,
+  ROUND(MAX(revenue_after_discount), 0) AS revenue
+FROM Quartiles
+WHERE quartile IN (1, 2, 3)
+GROUP BY quartile;
+
+ #4.What is the average discount value per transaction?
+ WITH ADV AS
+ (SELECT txn_id,
+		SUM(Discount_amount) as discount 
+         from sales
+GROUP BY txn_id)
+SELECT ROUND(AVG(discount),2) as avg_discount  from adv
+
+#4.What is the percentage split of all transactions for members vs non-members?
+SELECT
+  Case when member ='t' then 'members'
+	   when member ='f' then'non-members' 
+       end as member_category,
+  ROUND(COUNT(txn_id) * 100.0 / (SELECT COUNT(txn_id) FROM sales), 2) AS percentage_split
+FROM sales
+GROUP BY member_category;
+
+#5.What is the average revenue for member transactions and non-member transactions?
+SELECT Case when member ='t' then 'members'
+	   when member ='f' then'non-members' 
+       end as member_category,
+       ROUND(AVG(revenue),2) as avg_revnue
+       from sales
+       group by member_category
