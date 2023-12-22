@@ -1,3 +1,3 @@
 #CASE STUDY 7 - BALANCED TREE CLOTHING CO.
 -----------------------------------------------------------------------------------------------------
-[! https://8weeksqlchallenge.com/images/case-study-designs/7.png](url)
+![7](https://github.com/hemaprabhavathi20/8-Week-SQL-Challenge/assets/147178268/0685c8b7-a3d7-449a-80b7-863a0024e4d9)
