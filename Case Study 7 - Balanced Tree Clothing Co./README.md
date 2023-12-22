@@ -67,5 +67,5 @@ Case Study Questions:
 
 _______________________________________________________________________
 
-_**Changes made to table**_
+**Changes made to table**
 1. Added 2 new columns named discount and revenue in the sales table
