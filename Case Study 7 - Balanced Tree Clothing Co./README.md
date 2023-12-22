@@ -13,15 +13,15 @@ Table Of Contents:
 * Case Study Question
 _________________________________________________________________________________________________________________________
 
-##* Business Problem
+Business Problem
 ------------------------------------------------------------------------
 Balanced Tree Clothing Company prides themselves on providing an optimised range of clothing and lifestyle wear for the modern adventurer!
 
 Danny, the CEO of this trendy fashion company has asked you to assist the team’s merchandising teams analyse their sales performance and generate a basic financial report to share with the wider business
 
-##Available Data
+Available Data
 ---------------------------------------------------------------------------------
-Mainly 2 Tables are used.
+There are 2 main tables for the case study and are as follows:
         1. **Product_details includes all information about the entire range that Balanced Clothing sells in their store.**
         2. **sales contains product level information for all the transactions made for Balanced Tree including quantity, price, percentage discount, member status, a transaction ID and also the transaction timestamp.**
 
