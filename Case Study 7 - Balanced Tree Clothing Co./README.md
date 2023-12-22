@@ -34,12 +34,15 @@ ER Diagram
 Case Study Questions:
 --------------------------------------------------------------------------------
 **High Level Sales Analysis**
+
 1. What was the total quantity sold for all products?
 2. What is the total generated revenue for all products before discounts?
-3.What was the total discount amount for all products?
+3. What was the total discount amount for all products?
+
 
 
 **Transaction Analysis**
+
 1. How many unique transactions were there?
 2. What is the average unique products purchased in each transaction?
 3. What are the 25th, 50th and 75th percentile values for the revenue per transaction?
@@ -48,7 +51,9 @@ Case Study Questions:
 6.What is the average revenue for member transactions and non-member transactions?
 
 
+
 **Product Analysis**
+
 1. What are the top 3 products by total revenue before discount?
 2. What is the total quantity, revenue and discount for each segment?
 3. What is the top selling product for each segment?
