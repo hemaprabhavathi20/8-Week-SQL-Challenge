@@ -64,3 +64,8 @@ Case Study Questions:
 8. What is the percentage split of total revenue by category?
 9. What is the total transaction “penetration” for each product? (hint: penetration = number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions)
 10. What is the most common combination of at least 1 quantity of any 3 products in a 1 single transaction?
+
+_______________________________________________________________________
+
+_Changes made to table_
+1. Added 2 new columns named discount and revenue in the sales table
