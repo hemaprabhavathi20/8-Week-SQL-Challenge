@@ -1,0 +1,36 @@
+#1..How many transactions had a discount applied?
+SELECT COUNT(txn_id) as dicount_applied from sales
+WHERE discount > 0;
+#How many transactions had no discount applied?
+SELECT COUNT(txn_id) from sales
+WHERE DISCOUNT <=0;
+
+#2.Calculate the average discount percentage for transactions involving members. Compare it to transactions without members.
+SELECT member,round(AVG(discount),2) as avg_discount_for_members from sales
+where discount > 0
+group by member;    
+
+#3.Total Sales per Month
+SELECT
+  DATE_FORMAT(start_txn_time, '%Y-%m') AS TransactionMonth,
+  SUM(qty * price) AS TotalSales
+FROM
+  balanced_tree.sales
+GROUP BY
+  TransactionMonth
+ORDER BY
+  TransactionMonth;
+
+# 4.What percentage of transactions have high, medium, or low discounts?
+SELECT
+  CASE
+    WHEN discount >= 20 THEN 'High Discount'
+    WHEN discount >= 10 THEN 'Medium Discount'
+    ELSE 'Low Discount'
+  END AS DiscountCategory,
+  COUNT(txn_id) AS TransactionCount,
+  COUNT(txn_id) * 100.0 / (SELECT COUNT(txn_id) FROM balanced_tree.sales) AS Percentage
+FROM
+  balanced_tree.sales
+GROUP BY
+  DiscountCategory;
